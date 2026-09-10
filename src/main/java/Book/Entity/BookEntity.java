@@ -1,10 +1,10 @@
-package Entity;
+package Book.Entity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="books")
-public class BooksEntity {
+public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idBooks;
@@ -12,7 +12,7 @@ public class BooksEntity {
     private String name;
 
     @ManyToOne (fetch=FetchType.EAGER, optional = false )
-    private AuthorsEntity author;
+    private AuthorEntity author;
 
     private Float price;
 
@@ -20,7 +20,7 @@ public class BooksEntity {
         return idBooks;
     }
 
-    public BooksEntity setIdBooks(Integer idBooks) {
+    public BookEntity setIdBooks(Integer idBooks) {
         this.idBooks = idBooks;
         return this;
     }
@@ -29,16 +29,16 @@ public class BooksEntity {
         return name;
     }
 
-    public BooksEntity setName(String name) {
+    public BookEntity setName(String name) {
         this.name = name;
         return this;
     }
 
-    public AuthorsEntity getAuthor() {
+    public AuthorEntity getAuthor() {
         return author;
     }
 
-    public BooksEntity setAuthor(AuthorsEntity author) {
+    public BookEntity setAuthor(AuthorEntity author) {
         this.author = author;
         return this;
     }
@@ -47,7 +47,7 @@ public class BooksEntity {
         return price;
     }
 
-    public BooksEntity setPrice(Float price) {
+    public BookEntity setPrice(Float price) {
         this.price = price;
         return this;
     }
