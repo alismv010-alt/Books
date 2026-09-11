@@ -9,10 +9,10 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idBooks;
 
-    private String name;
+    private String title;
 
     @ManyToOne (fetch=FetchType.EAGER, optional = false )
-    private AuthorEntity author;
+    private AuthorEntity author_id;
 
     private Float price;
 
@@ -25,21 +25,21 @@ public class BookEntity {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public BookEntity setName(String name) {
-        this.name = name;
+    public BookEntity setTitle(String title) {
+        this.title = title;
         return this;
     }
 
-    public AuthorEntity getAuthor() {
-        return author;
+    public AuthorEntity getAuthor_id() {
+        return author_id;
     }
 
-    public BookEntity setAuthor(AuthorEntity author) {
-        this.author = author;
+    public BookEntity setAuthor(AuthorEntity author_id) {
+        this.author_id = author_id;
         return this;
     }
 

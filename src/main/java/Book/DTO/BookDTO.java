@@ -1,12 +1,18 @@
 package Book.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class BookDTO {
+
     private Integer idBooks;
 
-    private String name;
+    @NotBlank(message="Title is required")
+    private String title;
 
-    private AuthorDTO author;
+    @NotBlank(message="Author is required")
+    private AuthorDTO author_id;
 
+    @NotBlank(message="Price is required")
     private Float price;
 
     public Integer getIdBooks() {
@@ -18,21 +24,21 @@ public class BookDTO {
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public BookDTO setName(String name) {
-        this.name = name;
+    public BookDTO setTitle(String title) {
+        this.title = title;
         return this;
     }
 
-    public AuthorDTO getAuthor() {
-        return author;
+    public AuthorDTO getAuthor_id() {
+        return author_id;
     }
 
-    public BookDTO setAuthor(AuthorDTO author) {
-        this.author = author;
+    public BookDTO setAuthor_id(AuthorDTO author_id) {
+        this.author_id = author_id;
         return this;
     }
 
