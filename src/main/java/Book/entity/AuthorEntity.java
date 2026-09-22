@@ -1,4 +1,4 @@
-package Book.Entity;
+package Book.entity;
 
 import jakarta.persistence.*;
 
@@ -9,20 +9,20 @@ import java.util.List;
 @Table(name="authors")
 public class AuthorEntity {
     @Id
-    Integer idAuthor;
-    @OneToMany(mappedBy = "AuthorEntity", targetEntity = BookEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Integer id;
+    @OneToMany(mappedBy = "author_id", targetEntity = BookEntity.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<BookEntity> books;
     private String name;
     private String surname;
     private LocalDate dateofbirth;
     private LocalDate dateofdeath;
 
-    public Integer getIdAuthor() {
-        return idAuthor;
+    public Integer getId() {
+        return id;
     }
 
-    public AuthorEntity setIdAuthor(Integer idAuthor) {
-        this.idAuthor = idAuthor;
+    public AuthorEntity setId(Integer id) {
+        this.id = id;
         return this;
     }
 

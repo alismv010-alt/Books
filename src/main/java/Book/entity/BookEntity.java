@@ -1,4 +1,4 @@
-package Book.Entity;
+package Book.entity;
 
 import jakarta.persistence.*;
 
@@ -7,21 +7,33 @@ import jakarta.persistence.*;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idBooks;
+    private Integer id_books;
 
     private String title;
 
     @ManyToOne (fetch=FetchType.EAGER, optional = false )
+    @JoinColumn(name = "author_id")
     private AuthorEntity author_id;
 
     private Float price;
 
-    public Integer getIdBooks() {
-        return idBooks;
+    private Float cost_price;
+
+    public Float getCost_price() {
+        return cost_price;
     }
 
-    public BookEntity setIdBooks(Integer idBooks) {
-        this.idBooks = idBooks;
+    public BookEntity setCost_price(Float cost_price) {
+        this.cost_price = cost_price;
+        return this;
+    }
+
+    public Integer getId_books() {
+        return id_books;
+    }
+
+    public BookEntity setId_books(Integer id_books) {
+        this.id_books = id_books;
         return this;
     }
 

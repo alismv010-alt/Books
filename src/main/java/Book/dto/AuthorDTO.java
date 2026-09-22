@@ -1,8 +1,19 @@
-package Book.DTO;
+package Book.dto;
 
 import java.time.LocalDate;
 
 public class AuthorDTO {
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public AuthorDTO setId(Integer id) {
+        this.id = id;
+        return this;
+    }
+
     private String name;
     private String surname;
     private LocalDate dateofbirth;

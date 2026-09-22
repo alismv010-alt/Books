@@ -1,10 +1,10 @@
-package Book.DTO;
+package Book.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
 public class BookDTO {
 
-    private Integer idBooks;
+    private Integer id_books;
 
     @NotBlank(message="Title is required")
     private String title;
@@ -15,12 +15,12 @@ public class BookDTO {
     @NotBlank(message="Price is required")
     private Float price;
 
-    public Integer getIdBooks() {
-        return idBooks;
+    public Integer getId_books() {
+        return id_books;
     }
 
-    public BookDTO setIdBooks(Integer idBooks) {
-        this.idBooks = idBooks;
+    public BookDTO setId_books(Integer id_books) {
+        this.id_books = id_books;
         return this;
     }
 

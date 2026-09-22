@@ -1,7 +1,7 @@
-package Book.MapStruct;
+package Book.mapStruct;
 
-import Book.DTO.BookDTO;
-import Book.Entity.BookEntity;
+import Book.dto.BookDTO;
+import Book.entity.BookEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
