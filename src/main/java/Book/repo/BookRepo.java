@@ -41,6 +41,8 @@ public class BookRepo implements IBookRepo   {
                 orders.add(cb.desc(root.get(sortOrder.getProperty())));
             }
         }
+        cq.orderBy(orders);
+
 
         TypedQuery<BookEntity> query = em.createQuery(cq);
         query.setFirstResult((int)pageable.getOffset());
