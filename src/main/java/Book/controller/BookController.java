@@ -3,6 +3,8 @@ package Book.controller;
 import Book.dto.BookDTO;
 import Book.service.BookService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,20 +13,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/books")
 @CrossOrigin
+@RequiredArgsConstructor
 public class BookController {
     private final BookService service;
-    public BookController (BookService service) {
-        this.service=service;
-    }
 
     @GetMapping
-    public List<BookDTO> getBooks (@RequestParam(required = false) String title,
-                                   @RequestParam(required = false) Integer author_id,
+    public Page<BookDTO> getBooks (@RequestParam(required = false) String title,
+                                   @RequestParam(required = false) Integer authorId,
                                    @RequestParam(required = false) Float price,
                                    @RequestParam(required = false) Integer id,
                                    Pageable pageable)
     {
-        return service.getList(title,author_id,price,id, pageable);
+        return service.getList(title,authorId,price,id, pageable);
     }
 
     @PostMapping

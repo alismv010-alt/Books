@@ -1,30 +1,31 @@
 package Book.service;
 
 import Book.dto.BookDTO;
+import Book.entity.BookEntity;
 import Book.mapStruct.BookMapper;
-import Book.repo.BookRepo;
-import Book.repo.DataBookRepo;
+import Book.repository.bookRepository.DataBookRepository;
+import Book.specification.BookSpecification;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
+@RequiredArgsConstructor
 public class BookService {
-    private final DataBookRepo datarepo;
-    private final BookRepo repo;
-    public BookService (DataBookRepo datarepo, BookRepo repo) {
-        this.datarepo=datarepo;
-        this.repo=repo;
-    }
-    public List<BookDTO> getList (String title, Integer author_id,
+    private final DataBookRepository datarepo;
+    public Page<BookDTO> getList (String title, Integer authorId,
                                   Float price, Integer id, Pageable pageable)
     {
-        return repo.getBooks(title, author_id, price, id, pageable)
-                .stream()
-                .map(BookMapper.MAPPER::toDTO)
-                .collect(Collectors.toList());
+        Specification<BookEntity> spec = Specification
+                .where(BookSpecification.titleContains(title))
+                .and(BookSpecification.priceEquals(price))
+                .and(BookSpecification.idEquals(id))
+                .and(BookSpecification.authorIdEquals(authorId));
+
+        return datarepo.findAll(spec, pageable)
+                .map(BookMapper.MAPPER::toDTO);
     }
     public void create (BookDTO dto) {
         datarepo.save(BookMapper.MAPPER.toEntity(dto));
