@@ -7,7 +7,6 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface AuthorMapper {
-    AuthorMapper MAPPER = Mappers.getMapper(AuthorMapper.class);
 
     AuthorDTO toDTO (AuthorEntity entity);
 

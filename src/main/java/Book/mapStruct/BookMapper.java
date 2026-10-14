@@ -8,8 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", uses = {AuthorMapper.class})
 public interface BookMapper {
 
-    BookMapper MAPPER = Mappers.getMapper(BookMapper.class);
-
     BookDTO toDTO (BookEntity entity);
 
     BookEntity toEntity (BookDTO dto);

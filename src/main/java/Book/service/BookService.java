@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class BookService {
     private final DataBookRepository datarepo;
+    private final BookMapper bookMapper;
     public Page<BookDTO> getList (String title, Integer authorId,
                                   Float price, Integer id, Pageable pageable)
     {
@@ -25,13 +26,13 @@ public class BookService {
                 .and(BookSpecification.authorIdEquals(authorId));
 
         return datarepo.findAll(spec, pageable)
-                .map(BookMapper.MAPPER::toDTO);
+                .map(bookMapper::toDTO);
     }
     public void create (BookDTO dto) {
-        datarepo.save(BookMapper.MAPPER.toEntity(dto));
+        datarepo.save(bookMapper.toEntity(dto));
     }
     public void update (BookDTO dto) {
-        datarepo.save(BookMapper.MAPPER.toEntity(dto));
+        datarepo.save(bookMapper.toEntity(dto));
     }
     public void delete (Integer id) {
         datarepo.deleteById(id);
