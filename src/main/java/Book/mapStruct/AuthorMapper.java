@@ -5,7 +5,7 @@ import Book.entity.AuthorEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses={BookMapper.class})
 public interface AuthorMapper {
 
     AuthorDTO toDTO (AuthorEntity entity);

@@ -3,7 +3,7 @@ package Book.service;
 import Book.dto.BookDTO;
 import Book.entity.BookEntity;
 import Book.mapStruct.BookMapper;
-import Book.repository.bookRepository.DataBookRepository;
+import Book.repository.DataBookRepository;
 import Book.specification.BookSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

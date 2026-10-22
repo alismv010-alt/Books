@@ -5,6 +5,8 @@ import Book.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/authors")
 @CrossOrigin
@@ -12,8 +14,12 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorController {
     private final AuthorService service;
 
-    @GetMapping("/id")
-    public AuthorDTO getAuthor(@RequestParam Integer id) {
+    @GetMapping
+    public List<AuthorDTO> getAllAuthors() {
+        return service.getAllAuthors();
+    }
+    @GetMapping("/{id}")
+    public AuthorDTO getAuthor(@PathVariable Integer id) {
         return service.getAuthor(id);
     }
 }
