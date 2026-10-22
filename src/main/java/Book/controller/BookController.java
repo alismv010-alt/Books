@@ -19,12 +19,12 @@ public class BookController {
 
     @GetMapping
     public Page<BookDTO> getBooks (@RequestParam(required = false) String title,
-                                   @RequestParam(required = false) Integer authorId,
+                                   @RequestParam(required = false) String authorName,
                                    @RequestParam(required = false) Float price,
                                    @RequestParam(required = false) Integer id,
                                    Pageable pageable)
     {
-        return service.getList(title,authorId,price,id, pageable);
+        return service.getList(title,authorName,price,id, pageable);
     }
 
     @PostMapping

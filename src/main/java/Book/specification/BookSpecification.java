@@ -1,6 +1,8 @@
 package Book.specification;
 
+import Book.entity.AuthorEntity;
 import Book.entity.BookEntity;
+import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 
 public class BookSpecification {
@@ -26,10 +28,13 @@ public class BookSpecification {
                         : cb.equal(root.get("booksId"), id);
     }
 
-    public static Specification<BookEntity> authorIdEquals(Integer authorId) {
-        return (root, query, cb) ->
-                (authorId == null || authorId == 0)
-                        ? cb.conjunction()
-                        : cb.equal(root.get("authorId").get("id"), authorId);
+    public static Specification<BookEntity> authorNameContains(String authorName) {
+        return (root, query, cb) -> {
+            if (authorName == null || authorName.isBlank()) {
+                return cb.conjunction();
+            }
+            String pattern = "%" + authorName.trim().toLowerCase() + "%";
+            return cb.like(root.get("authorId").get("name"), pattern);
+        };
     }
 }

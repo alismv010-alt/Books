@@ -16,14 +16,14 @@ import org.springframework.stereotype.Service;
 public class BookService {
     private final DataBookRepository datarepo;
     private final BookMapper bookMapper;
-    public Page<BookDTO> getList (String title, Integer authorId,
+    public Page<BookDTO> getList (String title, String authorName,
                                   Float price, Integer id, Pageable pageable)
     {
         Specification<BookEntity> spec = Specification
                 .where(BookSpecification.titleContains(title))
                 .and(BookSpecification.priceEquals(price))
                 .and(BookSpecification.idEquals(id))
-                .and(BookSpecification.authorIdEquals(authorId));
+                .and(BookSpecification.authorNameContains(authorName));
 
         return datarepo.findAll(spec, pageable)
                 .map(bookMapper::toDTO);
