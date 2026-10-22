@@ -1,5 +1,6 @@
 package Book.dto;
 
+import Book.entity.BookEntity;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -10,7 +11,6 @@ public class AuthorDTO {
     private Integer id;
     private String name;
     private String surname;
-    private List<BookDTO> books;
     private LocalDate dateOfBirth;
     private LocalDate dateOfDeath;
 }

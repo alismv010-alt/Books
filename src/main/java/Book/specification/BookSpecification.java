@@ -1,8 +1,6 @@
 package Book.specification;
 
-import Book.entity.AuthorEntity;
 import Book.entity.BookEntity;
-import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;
 
 public class BookSpecification {
@@ -32,9 +30,11 @@ public class BookSpecification {
         return (root, query, cb) -> {
             if (authorName == null || authorName.isBlank()) {
                 return cb.conjunction();
+            } else {
+                String pattern = "%" + authorName.trim().toLowerCase() + "%";
+                return cb.like(root.get("authorId").get("name"), pattern);
             }
-            String pattern = "%" + authorName.trim().toLowerCase() + "%";
-            return cb.like(root.get("authorId").get("name"), pattern);
+
         };
     }
 }
