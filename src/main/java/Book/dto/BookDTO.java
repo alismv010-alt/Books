@@ -1,10 +1,13 @@
 package Book.dto;
 
+import Book.enums.BookCondition;
+import Book.validation.ValidBookCondition;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
+@ValidBookCondition
 public class BookDTO {
 
 
@@ -18,5 +21,9 @@ public class BookDTO {
 
     @NotBlank(message="Price is required")
     private Float price;
+
+    private boolean secondHand;
+
+    private BookCondition bookCondition;
 
 }

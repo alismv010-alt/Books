@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Authors</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Book Library</h1>
+  <a href="index.html">Books</a>
+  <a href="authors.html" class="active">Authors</a>
+</header>
+
+<main id="main"></main>
+
+<script src="common.js"></script>
+<script>
+const id = new URLSearchParams(location.search).get("id");
+
+async function showDetail(authorId) {
+  try {
+    const a = await api("/authors/" + encodeURIComponent(authorId));
+    $("main").innerHTML = `
+      <p><a class="btn ghost" href="authors.html">← All authors</a></p>
+      <div class="detail">
+        <h2 style="margin-top:0">✍️ ${esc(fullName(a))}</h2>
+        <dl>
+          <dt>ID</dt><dd>${esc(a.id)}</dd>
+          <dt>First name</dt><dd>${esc(a.name)}</dd>
+          <dt>Last name</dt><dd>${esc(a.surname)}</dd>
+          <dt>Date of birth</dt><dd>${esc(a.dateOfBirth || "—")}</dd>
+          <dt>Date of death</dt><dd>${esc(a.dateOfDeath || "—")}</dd>
+        </dl>
+        <a class="btn" href="index.html?authorName=${encodeURIComponent(a.name || "")}">See this author's books</a>
+      </div>`;
+  } catch (e) {
+    $("main").innerHTML = `<p><a class="btn ghost" href="authors.html">← All authors</a></p>
+      <div class="empty">${esc(e.message)}</div>`;
+  }
+}
+
+async function showList() {
+  try {
+    const authors = await api("/authors");
+    if (!authors.length) { $("main").innerHTML = '<div class="empty">No authors found</div>'; return; }
+    $("main").innerHTML = `<h2>Authors</h2><div class="grid">` + authors.map((a) => {
+      const hue = ((a.id ?? 0) * 61) % 360;
+      return `
+      <div class="card">
+        <div class="cover" style="height:90px;background:linear-gradient(135deg,hsl(${hue} 55% 50%),hsl(${(hue + 40) % 360} 55% 30%))">
+          ${esc((a.name || "?")[0].toUpperCase())}
+        </div>
+        <div class="body">
+          <h3>${esc(fullName(a))}</h3>
+          <span style="color:var(--muted);font-size:13px">ID: ${esc(a.id)}</span>
+        </div>
+        <div class="actions"><a class="btn" href="authors.html?id=${esc(a.id)}">Details</a></div>
+      </div>`;
+    }).join("") + `</div>`;
+  } catch (e) {
+    $("main").innerHTML = `<div class="empty">${esc(e.message)}</div>`;
+  }
+}
+
+id ? showDetail(id) : showList();
+</script>
+</body>
+</html>
