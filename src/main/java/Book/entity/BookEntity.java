@@ -1,6 +1,7 @@
 package Book.entity;
 
 import Book.enums.BookCondition;
+import Book.enums.BookGenre;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,5 +20,8 @@ public class BookEntity {
     @Column(name="is_second_hand")
     private boolean secondHand;
     @Enumerated(EnumType.STRING)
-    private BookCondition bookCondition;
+    private BookCondition condition;
+    private String description;
+    @Enumerated(EnumType.STRING)
+    private BookGenre genre;
 }

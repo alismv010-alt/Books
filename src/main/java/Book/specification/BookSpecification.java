@@ -1,6 +1,8 @@
 package Book.specification;
 
 import Book.entity.BookEntity;
+import Book.enums.BookCondition;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.springframework.data.jpa.domain.Specification;
 
 public class BookSpecification {
@@ -36,5 +38,18 @@ public class BookSpecification {
             }
 
         };
+    }
+    public static Specification<BookEntity> isSecondHand (Boolean secondHand) {
+        return (root,query, cb)->
+                (secondHand==null)
+                    ? cb.conjunction()
+                    : cb.equal(root.get("secondHand"), secondHand);
+    }
+    public static Specification<BookEntity> conditionContains (BookCondition bookCondition){
+        return (root, query, cb)->
+                (bookCondition==null)
+                    ? cb.conjunction()
+                    : cb.equal(root.get("condition"), bookCondition);
+
     }
 }

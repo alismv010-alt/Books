@@ -8,10 +8,10 @@ public class BookConditionValidator implements ConstraintValidator<ValidBookCond
     @Override
     public boolean isValid(BookDTO dto, ConstraintValidatorContext context) {
         if (dto==null) return true;
-        if (dto.isSecondHand() && dto.getBookCondition()==null) {
+        if (dto.isSecondHand() && dto.getCondition()==null) {
             return fail(context, "Condition is required for second-hand books");
         }
-        if (!dto.isSecondHand() && dto.getBookCondition()!=null) {
+        if (!dto.isSecondHand() && dto.getCondition()!=null) {
             return fail(context, "Condition must be empty for new books" );
         }
         return true;
